@@ -111,6 +111,9 @@ RUN chown user /etc/xrdp/cert.pem && \
 # as this would prevent new session from starting)
 RUN chown -R user /var/run/
 
+# grant user ownership to the entire /etc/xrdp/ folder
+RUN chown -R user /etc/xrdp/
+
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
 #     chown user /var/run/xrdp.pid
