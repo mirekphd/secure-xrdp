@@ -127,6 +127,8 @@ RUN chown -R user /usr/share/X11
 # (see Xwrapper.config (5) - Linux Man Pages)
 RUN echo "allowed_users=anybody" >> /etc/X11/Xwrapper.config && \
     echo "needs_root_rights=no" >> /etc/X11/Xwrapper.config
+# grant user ownership to Xwrapper.config
+RUN chown user /etc/X11/Xwrapper.config 
 
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
