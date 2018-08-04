@@ -135,6 +135,19 @@ RUN chown user /etc/X11/Xwrapper.config
 # sed -i -e 's/old/new/g' file.txt
 RUN sed -i "s/.xorgxrdp/\/home\/user\/.xorgxrdp/g" /etc/xrdp/sesman.ini
 
+# set the DISPLAY environment variable (which is not set automatically) 
+# to avoid this "display is zero error":
+# [INFO ] main: DISPLAY env var set to (null)
+# [ERROR] main: error, display is zero;
+# note that the display number must agree with that 
+# which has been set using X11DisplayOffset in the sesman.ini file,
+# and you can check it by issuing this command in the running container:
+# cat /etc/xrdp/sesman.ini | grep X11DisplayOffset
+# (the value of X11DisplayOffset is 10 by default, 
+# which results in env variable DISPLAY equal to 10.0)
+ENV DISPLAY=:10.0
+# RUN echo $DISPLAY
+
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
 #     chown user /var/run/xrdp.pid
