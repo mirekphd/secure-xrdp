@@ -114,8 +114,10 @@ RUN chown -R user /var/run/
 # grant user ownership to the entire /etc/xrdp/ folder
 RUN chown -R user /etc/xrdp/
 
-# grant user ownership to the entire /etc/X11/xrdp folder
-RUN chown -R user /etc/X11/xrdp
+# # grant user ownership to the entire /etc/X11/xrdp folder
+# RUN chown -R user /etc/X11/xrdp
+# grant user ownership to the entire /etc/X11 folder
+RUN chown -R user /etc/X11/
 
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
