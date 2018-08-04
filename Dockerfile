@@ -92,5 +92,18 @@ RUN echo "user:changeme" | chpasswd
 # add the keyboard maps
 COPY keymaps /etc/xrdp/
 
+
+# initialize and grant user ownership to the xrdp log file
+touch /var/log/xrdp.log
+chown user /var/log/xrdp.log
+
+# initialize and grant user ownership to the xrdp-sesman log file
+touch /var/log/xrdp-sesman.log
+chown user /var/log/xrdp-sesman.log
+
+# initialize xrdp.pid file and grant ownership to the user
+touch /var/run/xrdp.pid
+chown user /var/run/xrdp.pid
+
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT /entrypoint.sh
