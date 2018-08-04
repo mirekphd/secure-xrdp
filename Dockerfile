@@ -122,6 +122,10 @@ RUN chown -R user /etc/X11/
 # grant user ownership to the entire /usr/share/X11 folder
 RUN chown -R user /usr/share/X11
 
+# allow all users to use Xorg X server
+# (see Xwrapper.config (5) - Linux Man Pages)
+RUN echo "allowed_users=anybody/" >> /etc/X11/Xwrapper.config
+
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
 #     chown user /var/run/xrdp.pid
