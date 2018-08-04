@@ -105,6 +105,12 @@ RUN touch /var/log/xrdp-sesman.log && \
 RUN chown user /etc/xrdp/cert.pem && \
     chown user /etc/xrdp/key.pem
 
+# grant user ownership to the entire /var/run folder,
+# where xrdp.pid will be created at run time
+# (note that we cannot initialize this file in advance,
+# as this would prevent new session from starting)
+RUN chown -R /var/run/
+
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
 #     chown user /var/run/xrdp.pid
