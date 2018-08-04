@@ -130,6 +130,11 @@ RUN echo "allowed_users=anybody" >> /etc/X11/Xwrapper.config && \
 # grant user ownership to Xwrapper.config
 RUN chown user /etc/X11/Xwrapper.config 
 
+# replace the default log file location from the /root folder 
+# with a user-editable location (~/ folder)
+# sed -i -e 's/old/new/g' file.txt
+RUN sed -i -e 's/.xorgxrdp.%s.log/~/.xorgxrdp.%s.log/g' /etc/xrdp/sesman.ini
+
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
 #     chown user /var/run/xrdp.pid
