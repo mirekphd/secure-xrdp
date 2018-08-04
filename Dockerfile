@@ -158,6 +158,11 @@ RUN sed -i "s/.xorgxrdp/\/home\/user\/.xorgxrdp/g" /etc/xrdp/sesman.ini
 ENV DISPLAY=:10.0
 # RUN echo $DISPLAY
 
+# grant user ownership to the /tmp folder
+# to allow session manager to create subfolders there,
+# such as .ICE-unix
+RUN chown user /tmp
+
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
 #     chown user /var/run/xrdp.pid
