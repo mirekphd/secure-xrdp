@@ -10,6 +10,10 @@ dbus-daemon --system
 chown 1000 /var/log/xrdp.log
 chown 1000 /var/log/xrdp-sesman.log
 
+# initialize xrdp.pid file and grant ownership to the user
+touch /var/run/xrdp.pid
+chown 1000 /var/run/xrdp.pid
+
 # run xrdp and xrdp-sesman in the foreground so the logs show in docker
 xrdp-sesman -ns &
 xrdp -ns
