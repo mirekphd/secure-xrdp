@@ -85,8 +85,13 @@ RUN mkdir -p /usr/share/backgrounds
 ADD ubuntu-files/background-default.png /usr/share/backgrounds/background-default.png
 RUN ln -s /usr/share/icons/Numix-Circle /usr/share/icons/KXicons
 
-# add the user
+# create the user
 RUN useradd --create-home user
+
+# add user to the input and video groups
+RUN usermod -a -G input,video user
+
+# set user password
 RUN echo "user:changeme" | chpasswd
 
 # add the keyboard maps
