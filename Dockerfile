@@ -91,8 +91,10 @@ RUN useradd --create-home user
 # add user to the input and video groups
 RUN usermod -a -G input,video user
 
-# add user to 'tsusers' group (this is a group created by XRDP)
-RUN usermod -a -G tsusers user
+# add user to 'tsusers' group (this is a group that will be later 
+# created by XRDP, but now we have to initialize it ourselves)
+RUN groupadd tsusers && \ 
+    usermod -a -G tsusers user
 
 # set user password
 RUN echo "user:changeme" | chpasswd
