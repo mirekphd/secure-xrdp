@@ -15,7 +15,7 @@ touch /var/run/xrdp.pid
 chown 1000 /var/run/xrdp.pid
 
 # switch to user before running xrdp
-su 1000
+su user
 
 # run xrdp and xrdp-sesman in the foreground so the logs show in docker
 xrdp-sesman -ns &
