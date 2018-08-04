@@ -109,7 +109,7 @@ RUN chown user /etc/xrdp/cert.pem && \
 # where xrdp.pid will be created at run time
 # (note that we cannot initialize this file in advance,
 # as this would prevent new session from starting)
-RUN chown -R /var/run/
+RUN chown -R user /var/run/
 
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
