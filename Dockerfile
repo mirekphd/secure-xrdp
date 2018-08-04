@@ -133,7 +133,7 @@ RUN chown user /etc/X11/Xwrapper.config
 # replace the default log file location from the /root folder 
 # with a user-editable location (~/ folder)
 # sed -i -e 's/old/new/g' file.txt
-RUN sed -i "s/.xorgxrdp/.xorgxrdp/g" /etc/xrdp/sesman.ini
+RUN sed -i "s/.xorgxrdp/~/.xorgxrdp/g" /etc/xrdp/sesman.ini
 
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
