@@ -6,8 +6,12 @@ dbus-daemon --system
 # create the sock dir properly
 /bin/sh /usr/share/xrdp/socksetup
 
-# grant user ownership to the xrdp and xrdp-sesman log files
+# initialize and grant user ownership to the xrdp log file
+touch /var/log/xrdp.log
 chown 1000 /var/log/xrdp.log
+
+# initialize and grant user ownership to the xrdp-sesman log file
+touch /var/log/xrdp-sesman.log
 chown 1000 /var/log/xrdp-sesman.log
 
 # initialize xrdp.pid file and grant ownership to the user
