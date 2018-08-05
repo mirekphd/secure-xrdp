@@ -4,24 +4,24 @@ ARG xrdp_source=https://github.com/neutrinolabs/xrdp/releases/download/v0.9.3.1/
 ARG xorgxrdp_source=https://github.com/neutrinolabs/xorgxrdp/releases/download/v0.2.3/xorgxrdp-0.2.3.tar.gz
 
 # install packages
-RUN apt-get update \
-    && apt-get install --yes --force-yes --no-install-recommends \
-        software-properties-common \
-        xorg \
-        xserver-xorg \
-        xfce4 \
-        gnome-themes-standard \
-        gtk2-engines-pixbuf \
-        file-roller \
-        evince \
-        gpicview \
-        leafpad \
-        xfce4-whiskermenu-plugin \
-        ttf-ubuntu-font-family \
+RUN apt-get update && \
+    apt-get install --yes --force-yes --no-install-recommends \
         dbus-x11 \
+        evince \
+        file-roller \
+        gnome-themes-standard \
+        gpicview \
+        gtk2-engines-pixbuf \
+        leafpad \
+        software-properties-common \
+        ttf-ubuntu-font-family \
         vnc4server \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+        xfce4 \
+        xfce4-whiskermenu-plugin \
+        xorg \
+        xserver-xorg \    
+        apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # build and install xrdp from source in one step (minimise size of container)
 RUN apt-get update \
