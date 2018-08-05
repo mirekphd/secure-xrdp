@@ -15,7 +15,7 @@
 # and unlike the daemon itself, dbus-launch exits, allowing subsequent programs (such as xrdp) to run
 # dbus-daemon --system
 # dbus-daemon --session
-dbus-launch --exit-with-session
+dbus-launch 
 
 # create the sock dir properly
 /bin/sh /usr/share/xrdp/socksetup
