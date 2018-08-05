@@ -158,6 +158,7 @@ RUN apt-get update \
 
 # build and install xorgxrdp from source
 RUN apt-get update \
+    && cd /tmp \
     && wget --quiet --no-check-certificate ${XORGXRDP_URL} \
     && tar -xf xorgxrdp-*.tar.gz -C /tmp/ \
     && cd /tmp/xorgxrdp-* \
