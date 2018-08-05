@@ -3,6 +3,52 @@ FROM ubuntu:16.04
 # use non-interactive install model
 ENV DEBIAN_FRONTEND noninteractive
 
+
+#################################################################################################################
+#   ACCOUNT SETUP
+#################################################################################################################
+
+# set up user name and password
+ENV USER_NAME=rstudio
+ENV USER_PASS=rstudio
+
+# set up temporary user ID 
+# note it will be changed at run time by the 'uid_entrypoint.sh' 
+# script to allow running under OpenShift 
+ENV MY_UID=1000
+
+# set up group ID to 0
+# caution: setting group to 0 is essential 
+# for /tmp/rstudio-rsession/rstudio-d to be created,
+# avoiding "ERROR system error 13 (Permission denied) 
+# [path=/home/rstudio/.rstudio, target-dir=]" error 
+# and "Unable to connect to service" error message after logon;
+# NOTE: group 0 carries NO special priviledges, unlike uid 0
+# ENV MY_GID=0
+ENV MY_GID=0
+
+# set up home folder and add it to path
+# ENV HOME=/opt/app-root
+ENV HOME=/home/${USER_NAME}
+ENV PATH=${HOME}:${PATH}
+
+# add user
+RUN useradd -m -d $HOME -u ${MY_UID} -G ${MY_GID} ${USER_NAME}
+
+# set user password 
+RUN echo ${USER_NAME}:${USER_PASS} | chpasswd
+
+# change ownership of the home folder
+RUN chown ${USER_NAME}:${MY_GID} /home/${USER_NAME}
+
+# set up user for build execution and application runtime
+RUN chgrp -R ${MY_GID} ${HOME} && \
+    # copy user permissions to group 
+    # for home folder and /etc/passwd 
+    chmod -R g=u ${HOME} && \
+    chmod -R g=u /etc/passwd
+
+
 ARG xrdp_source=https://github.com/neutrinolabs/xrdp/releases/download/v0.9.3.1/xrdp-0.9.3.1.tar.gz
 ARG xorgxrdp_source=https://github.com/neutrinolabs/xorgxrdp/releases/download/v0.2.3/xorgxrdp-0.2.3.tar.gz
 
