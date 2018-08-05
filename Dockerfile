@@ -276,6 +276,13 @@ RUN echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}/.x
 RUN echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}/.Xclients && \
 	chmod +x /home/${USER_NAME}/.Xclients
 
+# set xfce as the custom desktop environment 
+# to be used by xrdp (by modifying the existing
+# global xinitrc file, used by all X sessions started by xinit or startx)
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/X11/xinit/xinitrc && \
+	chmod +x /etc/X11/xinit/xinitrc
+
+
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
 #     chown user /var/run/xrdp.pid
