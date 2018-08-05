@@ -9,8 +9,13 @@
 # caution: we cannot create a system-wide bus (with --system), 
 # because that would require root, so instead we create a per-login-session 
 # message bus (with --session), which can be run as standard user
+# caution: we cannot use dbus-daemon -session, as it does not exit, 
+# and would prevent xrdp from being run;
+# instead we use dbus-launch: a utility to start D-Bus message bus daemon from a shell script,
+# and unlike the daemon itself, dbus-launch exits, allowing subsequent programs (such as xrdp) to run
 # dbus-daemon --system
-dbus-daemon --session
+# dbus-daemon --session
+dbus-launch --exit-with-session
 
 # create the sock dir properly
 /bin/sh /usr/share/xrdp/socksetup
