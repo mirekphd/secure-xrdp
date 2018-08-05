@@ -100,14 +100,23 @@ ENV LC_ALL=en_US.UTF-8 \
 # - dependencies/utils first
 RUN apt-get update && \
     apt-get install -y --fix-missing \
+        build-essential \
         git \
         evince \
+	file \
         file-roller \
         gpicview \
         htop \
+        libpam0g-dev \
+	libssl-dev \
+	libxfixes-dev \
+	libxfont1-dev \
+        libxrandr-dev \
         leafpad \
         mc \
         nano \
+	nasm \
+	pkg-config \
         software-properties-common \
         ttf-ubuntu-font-family \
         wget && \ 
@@ -124,7 +133,8 @@ RUN apt-get update && \
         xfce4 \
         xfce4-whiskermenu-plugin \
         xorg \
-        xserver-xorg && \
+        xserver-xorg \
+	xserver-xorg-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -135,17 +145,6 @@ ARG xorgxrdp_source=https://github.com/neutrinolabs/xorgxrdp/releases/download/v
 # build and install xrdp from source in one step (minimise size of container)
 RUN apt-get update \
     && apt-get install --yes --force-yes --no-install-recommends \
-        wget \
-        build-essential \
-        libssl-dev \
-        libpam0g-dev \
-        libxrandr-dev \
-        nasm \
-        xserver-xorg-dev \
-        libxfont1-dev \
-        pkg-config \
-        file \
-        libxfixes-dev \
     && cd /tmp \
     && wget --no-check-certificate $xrdp_source \
     && tar -xf xrdp-*.tar.gz -C /tmp/ \
@@ -163,18 +162,6 @@ RUN apt-get update \
     && make install \
     && cd /tmp \
     && rm -rf xorgxrdp-* \
-    && apt-get remove --yes --force-yes \
-        wget \
-        build-essential \
-        libssl-dev \
-        libpam0g-dev \
-        libxrandr-dev \
-        nasm \
-        xserver-xorg-dev \
-        libxfont1-dev \
-        pkg-config \
-        file \
-        libxfixes-dev \
     && apt-get --yes autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
