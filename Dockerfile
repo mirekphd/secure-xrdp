@@ -48,12 +48,12 @@ RUN chgrp -R ${MY_GID} ${HOME} && \
     chmod -R g=u ${HOME} && \
     chmod -R g=u /etc/passwd
 
-
 # # create the user
 # RUN useradd --create-home user
 
 # add user to the input and video groups
-RUN usermod -a -G input,video ${USER_NAME}
+RUN groupadd input,video && \
+    usermod -a -G input,video ${USER_NAME}
 
 # add user to 'tsusers' group (this is a group that will be later 
 # created by XRDP, but now we have to initialize it ourselves)
