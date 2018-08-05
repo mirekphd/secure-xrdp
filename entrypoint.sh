@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# create the sock dir properly
+/bin/sh /usr/share/xrdp/socksetup
+
+# run xrdp and xrdp-sesman in the foreground so the logs show in docker
+xrdp-sesman -ns &
+xrdp -ns
+
 # create a dbus system daemon
 # note that it needs to be run successfully,
 # or else we will get errors like these in xorgxrdp log:
@@ -18,10 +25,3 @@
 # dbus-daemon --session
 # dbus-launch --exit-with-session
 dbus-launch --exit-with-session xfce4-session
-
-# create the sock dir properly
-/bin/sh /usr/share/xrdp/socksetup
-
-# run xrdp and xrdp-sesman in the foreground so the logs show in docker
-xrdp-sesman -ns &
-xrdp -ns
