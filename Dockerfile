@@ -1,5 +1,8 @@
 FROM ubuntu:16.04
 
+# use non-interactive install model
+ENV DEBIAN_FRONTEND noninteractive
+
 ARG xrdp_source=https://github.com/neutrinolabs/xrdp/releases/download/v0.9.3.1/xrdp-0.9.3.1.tar.gz
 ARG xorgxrdp_source=https://github.com/neutrinolabs/xorgxrdp/releases/download/v0.2.3/xorgxrdp-0.2.3.tar.gz
 
