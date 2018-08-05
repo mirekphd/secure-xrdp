@@ -131,14 +131,21 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
-ARG xrdp_source=https://github.com/neutrinolabs/xrdp/releases/download/v0.9.3.1/xrdp-0.9.3.1.tar.gz
-ARG xorgxrdp_source=https://github.com/neutrinolabs/xorgxrdp/releases/download/v0.2.3/xorgxrdp-0.2.3.tar.gz
+#################################################################################################################
+#   XRDP
+#################################################################################################################
+
+ARG XRDP_VER=0.9.7
+ARG XORGXRDP_VER=0.2.7
+
+ARG XRDP_URL=https://github.com/neutrinolabs/xrdp/releases/download/v${XRDP_VER}/xrdp-${XRDP_VER}.tar.gz
+ARG XORGXRDP_VER=https://github.com/neutrinolabs/xorgxrdp/releases/download/v${XORGXRDP}/xorgxrdp-${XORGXRDP}.tar.gz
 
 # build and install xrdp from source in one step (minimise size of container)
 RUN apt-get update \
     && apt-get install --yes --force-yes --no-install-recommends \
     && cd /tmp \
-    && wget --no-check-certificate $xrdp_source \
+    && wget --no-check-certificate ${XRDP_URL} \
     && tar -xf xrdp-*.tar.gz -C /tmp/ \
     && cd /tmp/xrdp-* \
     && ./configure \
@@ -146,7 +153,7 @@ RUN apt-get update \
     && make install \
     && cd /tmp \
     && rm -rf xrdp-* \
-    && wget --no-check-certificate $xorgxrdp_source \
+    && wget --no-check-certificate ${XORGXRDP_VER} \
     && tar -xf xorgxrdp-*.tar.gz -C /tmp/ \
     && cd /tmp/xorgxrdp-* \
     && ./configure \
