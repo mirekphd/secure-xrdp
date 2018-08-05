@@ -69,7 +69,7 @@ ARG xorgxrdp_source=https://github.com/neutrinolabs/xorgxrdp/releases/download/v
 
 # install packages
 RUN apt-get update && \
-    apt-get install --yes --force-yes --no-install-recommends \
+    apt-get install --yes --no-install-recommends \
         dbus-x11 \
         git \
         evince \
