@@ -52,7 +52,7 @@ RUN chgrp -R ${MY_GID} ${HOME} && \
 # RUN useradd --create-home user
 
 # add user to the input and video groups
-RUN groupadd input,video && \
+RUN groupadd input && groupadd video && \
     usermod -a -G input,video ${USER_NAME}
 
 # add user to 'tsusers' group (this is a group that will be later 
