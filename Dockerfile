@@ -49,6 +49,21 @@ RUN chgrp -R ${MY_GID} ${HOME} && \
     chmod -R g=u /etc/passwd
 
 
+# # create the user
+# RUN useradd --create-home user
+
+# add user to the input and video groups
+RUN usermod -a -G input,video user
+
+# add user to 'tsusers' group (this is a group that will be later 
+# created by XRDP, but now we have to initialize it ourselves)
+RUN groupadd tsusers && \ 
+    usermod -a -G tsusers user
+
+# # set user password
+# RUN echo "user:changeme" | chpasswd
+
+
 ARG xrdp_source=https://github.com/neutrinolabs/xrdp/releases/download/v0.9.3.1/xrdp-0.9.3.1.tar.gz
 ARG xorgxrdp_source=https://github.com/neutrinolabs/xorgxrdp/releases/download/v0.2.3/xorgxrdp-0.2.3.tar.gz
 
@@ -139,19 +154,6 @@ RUN mkdir -p /usr/share/backgrounds
 ADD ubuntu-files/background-default.png /usr/share/backgrounds/background-default.png
 RUN ln -s /usr/share/icons/Numix-Circle /usr/share/icons/KXicons
 
-# create the user
-RUN useradd --create-home user
-
-# add user to the input and video groups
-RUN usermod -a -G input,video user
-
-# add user to 'tsusers' group (this is a group that will be later 
-# created by XRDP, but now we have to initialize it ourselves)
-RUN groupadd tsusers && \ 
-    usermod -a -G tsusers user
-
-# set user password
-RUN echo "user:changeme" | chpasswd
 
 # add the keyboard maps
 COPY keymaps /etc/xrdp/
