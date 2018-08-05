@@ -282,6 +282,12 @@ RUN echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}/.X
 RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/X11/xinit/xinitrc && \
 	chmod +x /etc/X11/xinit/xinitrc
 
+# set xfce as the custom desktop environment 
+# to be used by xrdp (by modifying the existing
+# script used for starting windows managers)
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/xrdp/startwm.sh && \
+	chmod +x /etc/xrdp/startwm.sh
+
 
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
