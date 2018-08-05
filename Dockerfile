@@ -265,13 +265,5 @@ RUN chown ${USER_NAME} /tmp
 #     chown user /var/run/xrdp.pid
 
 
-# create a dbus system daemon
-# note that it needs to run as root,
-# or else we will get errors like these in xorgxrdp log:
-# "(EE) dbus-core: error connecting to system bus: 
-# org.freedesktop.DBus.Error.FileNotFound (Failed to connect 
-# to socket /var/run/dbus/system_bus_socket: No such file or directory)"
-RUN dbus-daemon --system
-
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT /entrypoint.sh
