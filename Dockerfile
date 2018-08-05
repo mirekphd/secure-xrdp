@@ -87,11 +87,7 @@ ENV LC_ALL=en_US.UTF-8 \
 
 # Install essential OS dependencies for building the docker image     
 
-# install Ubuntu packages:
-RUN apt-get update && \
-    apt-get install -y \
-    udev 
-
+# install Ubuntu packages:    
 # - dependencies/utils first
 RUN apt-get update && \
     apt-get install -y --fix-missing \
@@ -114,6 +110,7 @@ RUN apt-get update && \
 	pkg-config \
         software-properties-common \
         ttf-ubuntu-font-family \
+	udev \	
         wget && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
