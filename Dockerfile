@@ -237,8 +237,11 @@ RUN echo "allowed_users=anybody" >> /etc/X11/Xwrapper.config && \
 # grant user ownership to Xwrapper.config
 RUN chown ${USER_NAME} /etc/X11/Xwrapper.config 
 
+# specify the path to non-suid Xorg executable
+RUN sed -i "s/param=Xorg/param=/usr/lib/xorg/Xorg/g" /etc/xrdp/sesman.ini
+
 # replace the default log file location from the /root folder 
-# with a user-editable location (~/ folder)
+# with a user-editable location (/home/user_name folder)
 # sed -i -e 's/old/new/g' file.txt
 RUN sed -i "s/.xorgxrdp/\/home\/${USER_NAME}\/.xorgxrdp/g" /etc/xrdp/sesman.ini
 
