@@ -73,6 +73,29 @@ RUN ln -sf /bin/bash /bin/sh
 ENV SHELL=/bin/bash
 
 
+
+#################################################################################################################
+#   LOCALE
+#################################################################################################################
+
+# caution: not configuring locale will lead to dependency problems (errors during package installations)
+
+# prior to setting locale (e.g. LC_ALL=), it has to be generated 
+# because en_US locales are not available in Ubuntu by default
+RUN apt-get update && apt-get install -y locales && \
+	locale-gen en_US.UTF-8 
+
+ENV LC_ALL=en_US.UTF-8 \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8
+    
+    
+#################################################################################################################
+#   UPDATE UBUNTU
+#################################################################################################################
+
+# Install essential OS dependencies for building the docker image     
+
 # install packages
 RUN apt-get update && \
     apt-get install -y --fix-missing \
