@@ -271,6 +271,11 @@ RUN chown ${USER_NAME} /tmp
 RUN echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}/.xinitrc && \
 	chmod +x /home/${USER_NAME}/.xinitrc
 
+# set xfce as the custom desktop environment 
+# to be used by xrdp (by creating ~/.Xclients file and making it executable)
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}/.Xclients && \
+	chmod +x /home/${USER_NAME}/.Xclients
+
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
 #     chown user /var/run/xrdp.pid
