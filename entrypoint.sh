@@ -12,10 +12,12 @@
 # caution: we cannot use dbus-daemon -session, as it does not exit, 
 # and would prevent xrdp from being run;
 # instead we use dbus-launch: a utility to start D-Bus message bus daemon from a shell script,
-# and unlike the daemon itself, dbus-launch exits, allowing subsequent programs (such as xrdp) to run
+# and unlike the daemon itself, dbus-launch exits, allowing subsequent programs (such as xrdp) to run;
+# note also that we must specify which session should be used (e.g. xfce4-session)
 # dbus-daemon --system
 # dbus-daemon --session
-dbus-launch 
+# dbus-launch --exit-with-session
+dbus-launch --exit-with-session xfce4-session
 
 # create the sock dir properly
 /bin/sh /usr/share/xrdp/socksetup
