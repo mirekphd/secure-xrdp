@@ -96,28 +96,35 @@ ENV LC_ALL=en_US.UTF-8 \
 
 # Install essential OS dependencies for building the docker image     
 
-# install packages
+# install Ubuntu packages:
+# - dependencies/utils first
 RUN apt-get update && \
     apt-get install -y --fix-missing \
-        dbus-x11 \
         git \
         evince \
         file-roller \
-        gnome-themes-standard \
         gpicview \
-        gtk2-engines-pixbuf \
         htop \
         leafpad \
         mc \
         nano \
         software-properties-common \
         ttf-ubuntu-font-family \
+        wget && \ 
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# - graphical desktop environment second
+RUN apt-get update && \
+    apt-get install -y --fix-missing \
+        dbus-x11 \
+        gnome-themes-standard \
+	gtk2-engines-pixbuf \
         vnc4server \
-        wget \
         xfce4 \
         xfce4-whiskermenu-plugin \
         xorg \
-        xserver-xorg && \ 
+        xserver-xorg && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
