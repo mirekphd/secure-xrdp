@@ -53,12 +53,12 @@ RUN chgrp -R ${MY_GID} ${HOME} && \
 # RUN useradd --create-home user
 
 # add user to the input and video groups
-RUN usermod -a -G input,video user
+RUN usermod -a -G input,video ${USER_NAME}
 
 # add user to 'tsusers' group (this is a group that will be later 
 # created by XRDP, but now we have to initialize it ourselves)
 RUN groupadd tsusers && \ 
-    usermod -a -G tsusers user
+    usermod -a -G tsusers ${USER_NAME}
 
 # # set user password
 # RUN echo "user:changeme" | chpasswd
@@ -161,32 +161,32 @@ COPY keymaps /etc/xrdp/
 
 # initialize and grant user ownership to the xrdp log file
 RUN touch /var/log/xrdp.log && \
-    chown user /var/log/xrdp.log
+    chown ${USER_NAME} /var/log/xrdp.log
 
 # initialize and grant user ownership to the xrdp-sesman log file
 RUN touch /var/log/xrdp-sesman.log && \
-    chown user /var/log/xrdp-sesman.log
+    chown ${USER_NAME} /var/log/xrdp-sesman.log
 
 # grant user ownership to the xrdp certificate
-RUN chown user /etc/xrdp/cert.pem && \
-    chown user /etc/xrdp/key.pem
+RUN chown ${USER_NAME} /etc/xrdp/cert.pem && \
+    chown ${USER_NAME} /etc/xrdp/key.pem
 
 # grant user ownership to the entire /var/run folder,
 # where xrdp.pid will be created at run time
 # (note that we cannot initialize this file in advance,
 # as this would prevent new session from starting)
-RUN chown -R user /var/run/
+RUN chown -R ${USER_NAME} /var/run/
 
 # grant user ownership to the entire /etc/xrdp/ folder
-RUN chown -R user /etc/xrdp/
+RUN chown -R ${USER_NAME} /etc/xrdp/
 
 # # grant user ownership to the entire /etc/X11/xrdp folder
 # RUN chown -R user /etc/X11/xrdp
 # grant user ownership to the entire /etc/X11 folder
-RUN chown -R user /etc/X11/
+RUN chown -R ${USER_NAME} /etc/X11/
 
 # grant user ownership to the entire /usr/share/X11 folder
-RUN chown -R user /usr/share/X11
+RUN chown -R ${USER_NAME} /usr/share/X11
 
 # allow all users to use Xorg X server
 # and make it drop its default root rights
@@ -194,12 +194,12 @@ RUN chown -R user /usr/share/X11
 RUN echo "allowed_users=anybody" >> /etc/X11/Xwrapper.config && \
     echo "needs_root_rights=no" >> /etc/X11/Xwrapper.config
 # grant user ownership to Xwrapper.config
-RUN chown user /etc/X11/Xwrapper.config 
+RUN chown ${USER_NAME} /etc/X11/Xwrapper.config 
 
 # replace the default log file location from the /root folder 
 # with a user-editable location (~/ folder)
 # sed -i -e 's/old/new/g' file.txt
-RUN sed -i "s/.xorgxrdp/\/home\/user\/.xorgxrdp/g" /etc/xrdp/sesman.ini
+RUN sed -i "s/.xorgxrdp/\/home\/${USER_NAME}\/.xorgxrdp/g" /etc/xrdp/sesman.ini
 
 # set the DISPLAY environment variable (which is not set automatically) 
 # to avoid this "display is zero error":
@@ -217,7 +217,7 @@ ENV DISPLAY=:10.0
 # grant user ownership to the /tmp folder
 # to allow session manager to create subfolders there,
 # such as .ICE-unix
-RUN chown user /tmp
+RUN chown ${USER_NAME} /tmp
 
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
