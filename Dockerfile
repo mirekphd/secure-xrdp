@@ -64,12 +64,18 @@ RUN groupadd tsusers && \
 # RUN echo "user:changeme" | chpasswd
 
 
-ARG xrdp_source=https://github.com/neutrinolabs/xrdp/releases/download/v0.9.3.1/xrdp-0.9.3.1.tar.gz
-ARG xorgxrdp_source=https://github.com/neutrinolabs/xorgxrdp/releases/download/v0.2.3/xorgxrdp-0.2.3.tar.gz
+#################################################################################################################
+#   SHELL
+#################################################################################################################
+
+# Configure bash
+RUN ln -sf /bin/bash /bin/sh
+ENV SHELL=/bin/bash
+
 
 # install packages
 RUN apt-get update && \
-    apt-get install -y \
+    apt-get install -y --fix-missing \
         dbus-x11 \
         git \
         evince \
@@ -91,6 +97,10 @@ RUN apt-get update && \
         xserver-xorg && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+ARG xrdp_source=https://github.com/neutrinolabs/xrdp/releases/download/v0.9.3.1/xrdp-0.9.3.1.tar.gz
+ARG xorgxrdp_source=https://github.com/neutrinolabs/xorgxrdp/releases/download/v0.2.3/xorgxrdp-0.2.3.tar.gz
 
 # build and install xrdp from source in one step (minimise size of container)
 RUN apt-get update \
