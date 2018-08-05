@@ -7,15 +7,20 @@ ARG xorgxrdp_source=https://github.com/neutrinolabs/xorgxrdp/releases/download/v
 RUN apt-get update && \
     apt-get install --yes --force-yes --no-install-recommends \
         dbus-x11 \
+        git \
         evince \
         file-roller \
         gnome-themes-standard \
         gpicview \
         gtk2-engines-pixbuf \
+        htop \
         leafpad \
+        mc \
+        nano \
         software-properties-common \
         ttf-ubuntu-font-family \
         vnc4server \
+        wget \
         xfce4 \
         xfce4-whiskermenu-plugin \
         xorg \
