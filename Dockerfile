@@ -24,8 +24,8 @@ RUN apt-get update && \
         xfce4 \
         xfce4-whiskermenu-plugin \
         xorg \
-        xserver-xorg \    
-        apt-get clean && \
+        xserver-xorg && \ 
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # build and install xrdp from source in one step (minimise size of container)
