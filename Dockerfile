@@ -145,7 +145,7 @@ ARG XORGXRDP_VER=https://github.com/neutrinolabs/xorgxrdp/releases/download/v${X
 RUN apt-get update \
     && apt-get install -y \
     && cd /tmp \
-    && wget --no-check-certificate ${XRDP_URL} \
+    && wget --quiet --no-check-certificate ${XRDP_URL} \
     && tar -xf xrdp-*.tar.gz -C /tmp/ \
     && cd /tmp/xrdp-* \
     && ./configure \
@@ -160,7 +160,7 @@ RUN apt-get update \
 # build and install xorgxrdp from source
 RUN apt-get update \
     && apt-get install -y \
-    && wget --no-check-certificate ${XORGXRDP_VER} \
+    && wget --quiet --no-check-certificate ${XORGXRDP_VER} \
     && tar -xf xorgxrdp-*.tar.gz -C /tmp/ \
     && cd /tmp/xorgxrdp-* \
     && ./configure \
