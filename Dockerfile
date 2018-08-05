@@ -141,7 +141,7 @@ ARG XORGXRDP_VER=0.2.7
 ARG XRDP_URL=https://github.com/neutrinolabs/xrdp/releases/download/v${XRDP_VER}/xrdp-${XRDP_VER}.tar.gz
 ARG XORGXRDP_VER=https://github.com/neutrinolabs/xorgxrdp/releases/download/v${XORGXRDP}/xorgxrdp-${XORGXRDP}.tar.gz
 
-# build and install xrdp from source in one step (minimise size of container)
+# build and install xrdp from source
 RUN apt-get update \
     && apt-get install --yes --force-yes --no-install-recommends \
     && cd /tmp \
@@ -153,6 +153,13 @@ RUN apt-get update \
     && make install \
     && cd /tmp \
     && rm -rf xrdp-* \
+    && apt-get --yes autoremove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# build and install xorgxrdp from source
+RUN apt-get update \
+    && apt-get install --yes --force-yes --no-install-recommends \
     && wget --no-check-certificate ${XORGXRDP_VER} \
     && tar -xf xorgxrdp-*.tar.gz -C /tmp/ \
     && cd /tmp/xorgxrdp-* \
