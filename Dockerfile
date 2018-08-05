@@ -260,6 +260,14 @@ ENV DISPLAY=:10.0
 # such as .ICE-unix
 RUN chown ${USER_NAME} /tmp
 
+# start a session bus instance of dbus-daemon using a shell script;
+# note we should run dbus-launch --exit-with-session after the X server 
+# has started and become available,
+# so we put the bus starting code in the ~/.xinitrc file,
+# which contains the client program which will be used by xinit or startx
+echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}.xinitrc && \
+	chmod +x /home/${USER_NAME}.xinitrc
+
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
 #     chown user /var/run/xrdp.pid
