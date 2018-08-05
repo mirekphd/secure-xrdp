@@ -119,7 +119,7 @@ RUN apt-get update && \
 	pkg-config \
         software-properties-common \
         ttf-ubuntu-font-family \
-	udev
+	udev \
         wget && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
