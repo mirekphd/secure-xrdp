@@ -51,15 +51,6 @@ RUN chgrp -R ${MY_GID} ${HOME} && \
 # # create the user
 # RUN useradd --create-home user
 
-# add user to the input and video groups
-RUN groupadd input && \
-    usermod -a -G input,video ${USER_NAME}
-
-# add user to 'tsusers' group (this is a group that will be later 
-# created by XRDP, but now we have to initialize it ourselves)
-RUN groupadd tsusers && \ 
-    usermod -a -G tsusers ${USER_NAME}
-
 # # set user password
 # RUN echo "user:changeme" | chpasswd
 
@@ -184,6 +175,15 @@ ADD ubuntu-files/xfce-perchannel-xml /etc/xdg/xfce4/xfconf/xfce-perchannel-xml
 RUN mkdir -p /usr/share/backgrounds
 ADD ubuntu-files/background-default.png /usr/share/backgrounds/background-default.png
 RUN ln -s /usr/share/icons/Numix-Circle /usr/share/icons/KXicons
+
+
+# add user to the input and video groups
+RUN usermod -a -G input,video ${USER_NAME}
+
+# add user to 'tsusers' group (this is a group that will be later 
+# created by XRDP, but now we have to initialize it ourselves)
+RUN groupadd tsusers && \ 
+    usermod -a -G tsusers ${USER_NAME}
 
 
 # add the keyboard maps
