@@ -258,9 +258,7 @@ ENV DISPLAY=:10.0
 # grant user ownership to the /tmp folder
 # to allow session manager to create subfolders there,
 # such as .ICE-unix
-RUN chown ${USER_
-
-} /tmp
+RUN chown ${USER_NAME} /tmp
 
 # start a session bus instance of dbus-daemon using a shell script;
 # note we should run dbus-launch --exit-with-session after the X server 
