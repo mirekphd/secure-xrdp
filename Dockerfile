@@ -143,7 +143,7 @@ ARG XORGXRDP_VER=https://github.com/neutrinolabs/xorgxrdp/releases/download/v${X
 
 # build and install xrdp from source
 RUN apt-get update \
-    && apt-get install --yes --force-yes --no-install-recommends \
+    && apt-get install -y \
     && cd /tmp \
     && wget --no-check-certificate ${XRDP_URL} \
     && tar -xf xrdp-*.tar.gz -C /tmp/ \
@@ -159,7 +159,7 @@ RUN apt-get update \
 
 # build and install xorgxrdp from source
 RUN apt-get update \
-    && apt-get install --yes --force-yes --no-install-recommends \
+    && apt-get install -y \
     && wget --no-check-certificate ${XORGXRDP_VER} \
     && tar -xf xorgxrdp-*.tar.gz -C /tmp/ \
     && cd /tmp/xorgxrdp-* \
@@ -175,7 +175,7 @@ RUN apt-get update \
 # install theme
 RUN add-apt-repository ppa:numix/ppa \
     && apt-get update \
-    && apt-get install --yes --force-yes --no-install-recommends numix-icon-theme numix-icon-theme-circle \
+    && apt-get install -y numix-icon-theme numix-icon-theme-circle \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
