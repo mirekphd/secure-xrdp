@@ -265,7 +265,7 @@ RUN chown ${USER_NAME} /tmp
 # has started and become available,
 # so we put the bus starting code in the ~/.xinitrc file,
 # which contains the client program which will be used by xinit or startx
-echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}.xinitrc && \
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}.xinitrc && \
 	chmod +x /home/${USER_NAME}.xinitrc
 
 # # initialize xrdp.pid file and grant ownership to the user
