@@ -312,6 +312,9 @@ RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
 RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/profile.d/start_xfce4_session.sh && \
 	chmod +x /etc/profile.d/start_xfce4_session.sh
 
+# disable access control in X server, allowing clients to connect from any host
+RUN xhost +
+
 
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
