@@ -14,10 +14,19 @@ The current Xrdp version is
 ## Running it
 
 Start the container and expose the RDP server on the desired port (default is 3389).
+- basic:
 
 ```
-docker run -d -p 3389:3389 kxes/desktop
+docker run -p 3389:3389 mirekphd/secure-xrdp:latest
+
 ```
+- secure (mimicking OpenShift):
+
+```
+docker run --rm --name secure-xrdp -it -p 3389:3389 -u 1000 --cap-drop=SETUID --cap-drop=SETGID --cap-drop=KILL --cap-drop=MKNOD mirekphd/secure-xrdp:latest
+
+```
+
 
 Connect your RDP client to this port. Default username / password is `user / changeme`.
 
