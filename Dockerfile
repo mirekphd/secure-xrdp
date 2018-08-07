@@ -267,20 +267,19 @@ RUN chown ${USER_NAME} /tmp
 # note we should run dbus-launch --exit-with-session after the X server 
 # has started and become available,
 # so we put the bus starting code in the ~/.xinitrc file,
-# which contains the client program which will be used by xinit or startx
+# which contains the client program which will be used by xinit or startx;
+# we also set xfce as the custom desktop environment 
+# to be used by xrdp (by modifying the existing
+# global xinitrc file, used by all X sessions started by xinit or startx)
 RUN echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}/.xinitrc && \
-	chmod +x /home/${USER_NAME}/.xinitrc
-
+	chmod +x /home/${USER_NAME}/.xinitrc && \
+	echo "dbus-launch --exit-with-session xfce4-session" > /etc/X11/xinit/xinitrc && \
+	chmod +x /etc/X11/xinit/xinitrc
+	
 # set xfce as the custom desktop environment 
 # to be used by xrdp (by creating ~/.Xclients file and making it executable)
 RUN echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}/.Xclients && \
 	chmod +x /home/${USER_NAME}/.Xclients
-
-# set xfce as the custom desktop environment 
-# to be used by xrdp (by modifying the existing
-# global xinitrc file, used by all X sessions started by xinit or startx)
-RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/X11/xinit/xinitrc && \
-	chmod +x /etc/X11/xinit/xinitrc
 
 # set xfce as the custom desktop environment 
 # to be used by xrdp (by modifying the existing
