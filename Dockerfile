@@ -326,7 +326,7 @@ RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/profile.d/start_
 
 # initialize X authentication:
 # - add env var with user-accessible path to .Xauthority 
-ENV XAUTHORITY=/home/rstudio/.Xauthority
+ENV XAUTHORITY=/home/${USER_NAME}/.Xauthority
 # - initialize the empty .Xauthority file
 # and add full permissions to everyone
 RUN touch /home/${USER_NAME}/.Xauthority && \
