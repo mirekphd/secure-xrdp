@@ -302,6 +302,16 @@ RUN mkdir /tmp/.ICE-unix && \
 RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
 	chmod +x /etc/rc.local
 
+# add launching xfce windows manager on exit of dbus-launch
+# to the profile.d folder (executed at the end of each multiuser runlevel)
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
+	chmod +x /etc/rc.local
+
+# add launching xfce windows manager on exit of dbus-launch
+# to the /etc/profile.d folder (executed when a user logs in) 
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/profile.d/start_xfce4_session.sh && \
+	chmod +x /etc/profile.d/start_xfce4_session.sh
+
 
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
