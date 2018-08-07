@@ -327,7 +327,7 @@ ENV XAUTHORITY=/home/rstudio/.Xauthority
 # - initialize the empty .Xauthority file
 # and add full permissions to everyone
 RUN touch /home/${USER_NAME}/.Xauthority && \
-	chown ${USER_NAME} /home/${USER_NAME}/.Xauthority
+	chown ${USER_NAME} /home/${USER_NAME}/.Xauthority && \
 	chmod ugo+rwx /home/${USER_NAME}/.Xauthority
 
 # # initialize xrdp.pid file and grant ownership to the user
