@@ -315,8 +315,11 @@ RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
 RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/profile.d/start_xfce4_session.sh && \
 	chmod +x /etc/profile.d/start_xfce4_session.sh
 
-# disable access control in X server, allowing clients to connect from any host
-RUN xhost +
+# # disable access control in X server, allowing clients to connect from any host;
+# # caution this command cannot be executed until a display is created
+# # (running it earlier would result in the following error:
+# # "xhost:  unable to open display ":10.0"")
+# RUN xhost +
 
 
 # # initialize xrdp.pid file and grant ownership to the user
