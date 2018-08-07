@@ -321,6 +321,14 @@ RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/profile.d/start_
 # # "xhost:  unable to open display ":10.0"")
 # RUN xhost +
 
+# initialize X authentication:
+# - add env var with user-accessible path to .Xauthority 
+ENV XAUTHORITY=/home/rstudio/.Xauthority
+# - initialize the empty .Xauthority file
+# and add full permissions to everyone
+RUN touch /home/${USER_NAME}/.Xauthority && \
+	chown ${USER_NAME} /home/${USER_NAME}/.Xauthority
+	chmod ugo+rwx /home/${USER_NAME}/.Xauthority
 
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
