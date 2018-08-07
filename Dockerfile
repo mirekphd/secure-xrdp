@@ -254,7 +254,10 @@ RUN sed -i "s/.xorgxrdp/\/home\/${USER_NAME}\/.xorgxrdp/g" /etc/xrdp/sesman.ini
 # and you can check it by issuing this command in the running container:
 # cat /etc/xrdp/sesman.ini | grep X11DisplayOffset
 # (the value of X11DisplayOffset is 10 by default, 
-# which results in env variable DISPLAY equal to 10.0)
+# which results in env variable DISPLAY equal to 10.0);
+# caution: on each subsequent login (following a logoff) 
+# a new display is created, so it is required to increment this variable
+# before xfce session manager can be launched (or else black screen will be displayed)
 ENV DISPLAY=:10.0
 # RUN echo $DISPLAY
 
