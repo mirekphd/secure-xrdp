@@ -15,8 +15,10 @@ ENV USER_PASS=rstudio
 # set up temporary user ID 
 # note it will be changed at run time by the 'uid_entrypoint.sh' 
 # script to allow running under OpenShift 
-# ENV MY_UID=1000
-ENV MY_UID=1000220000
+# caution: do not set very high UIDs (as would be alloted by OpenShift, e.g. 1000220000), 
+# since they cause size explosion in the image data (10s of GBs used in /var/lib/docker/overlay2)  
+# ENV MY_UID=1000220000
+ENV MY_UID=1000
 
 # set up group ID to 0
 # caution: setting group to 0 is essential 
