@@ -275,22 +275,22 @@ RUN chown ${USER_NAME} /tmp
 # to the existing global xinitrc file, used by all X sessions started by xinit or startx;
 # note we also add launching xfce windows manager on exit of dbus-launch
 # to the existing xinitrc file in the xfce4 folder
-RUN echo "/usr/bin/dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}/.xinitrc && \
+RUN echo "dbus-launch --exit-with-session /usr/bin/xfce4-session" > /home/${USER_NAME}/.xinitrc && \
 	chmod +x /home/${USER_NAME}/.xinitrc && \
-	echo "/usr/bin/dbus-launch --exit-with-session xfce4-session" > /etc/X11/xinit/xinitrc && \
+	echo "dbus-launch --exit-with-session xfce4-session" > /etc/X11/xinit/xinitrc && \
 	chmod +x /etc/X11/xinit/xinitrc && \
-	echo "/usr/bin/dbus-launch --exit-with-session xfce4-session" > /etc/xdg/xfce4/xinitrc && \
+	echo "dbus-launch --exit-with-session xfce4-session" > /etc/xdg/xfce4/xinitrc && \
 	chmod +x /etc/xdg/xfce4/xinitrc
 	
 # set xfce as the custom desktop environment 
 # to be used by xrdp (by creating ~/.Xclients file and making it executable)
-RUN echo "/usr/bin/dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}/.Xclients && \
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}/.Xclients && \
 	chmod +x /home/${USER_NAME}/.Xclients
 
 # set xfce as the custom desktop environment 
 # to be used by xrdp (by modifying the existing
 # script used for starting windows managers)
-RUN echo "/usr/bin/dbus-launch --exit-with-session xfce4-session" > /etc/xrdp/startwm.sh && \
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/xrdp/startwm.sh && \
 	chmod +x /etc/xrdp/startwm.sh
 
 # for some reason .ICE-unix must be root-owned, and making it user-owned
@@ -302,17 +302,17 @@ RUN mkdir /tmp/.ICE-unix && \
 
 # add launching xfce windows manager on exit of dbus-launch
 # to the rc.local script (executed at the end of each multiuser runlevel)
-RUN echo "/usr/bin/dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
 	chmod +x /etc/rc.local
 
 # add launching xfce windows manager on exit of dbus-launch
 # to the profile.d folder (executed at the end of each multiuser runlevel)
-RUN echo "/usr/bin/dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
 	chmod +x /etc/rc.local
 
 # add launching xfce windows manager on exit of dbus-launch
 # to the /etc/profile.d folder (executed when a user logs in) 
-RUN echo "/usr/bin/dbus-launch --exit-with-session xfce4-session" > /etc/profile.d/start_xfce4_session.sh && \
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/profile.d/start_xfce4_session.sh && \
 	chmod +x /etc/profile.d/start_xfce4_session.sh
 
 # disable access control in X server, allowing clients to connect from any host
