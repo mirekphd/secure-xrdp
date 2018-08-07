@@ -288,6 +288,13 @@ RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/X11/xinit/xinitr
 RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/xrdp/startwm.sh && \
 	chmod +x /etc/xrdp/startwm.sh
 
+# for some reason .ICE-unix must be root-owned, and making it user-owned
+# causes xfce4-session to raise the following error:
+# "_ICETransmkdir: ERROR: euid != 0, directory /tmp/.ICE-unix will not be created."
+RUN mkdir /tmp/.ICE-unix && \
+    chown 0:0 /tmp/.ICE-unix && \
+    chmod ugo+rwx /tmp/.ICE-unix
+
 
 # # initialize xrdp.pid file and grant ownership to the user
 # RUN touch /var/run/xrdp.pid && \
