@@ -338,6 +338,24 @@ RUN touch /home/${USER_NAME}/.Xauthority && \
 #     chown user /var/run/xrdp.pid
 
 
+# delete existing entry for the user from /etc/passwd
+# caution: this is absolutely essential to avoid user IDs mismatch,
+# which prevents both RStudio Server and NX Server from starting,
+# with RStudio raising "Error on logon: Error occured during transmission" message after logon,
+# and NX Server raising "NXNODE ERROR! Cannot write to .Xauthority file in /home/rstudio on the local host. 
+# Please verify permission attributes for that file"
+RUN sed -i "/${USER_NAME}:x/d" /etc/passwd
+
+
+# copy the script for user name recognition at runtime 
+# with an arbitrary UID - for OpenShift deployments
+# caution: even though entrypoint would work without this copy
+# under docker run, for OpenShift we have to copy the script to
+# the container and give everyone exec rights to it or else it won't 
+# run on OpenShift, raising "Error response from daemon: 
+# OCI runtime create failed: container_linux.go:348: 
+# starting container process caused "exec: \"uid_entrypoint.sh\": 
+# executable file not found in $PATH":"
 COPY entrypoint.sh /entrypoint.sh
 
 # caution: adding exec rights to both user and group is essential
