@@ -31,3 +31,10 @@ xrdp-sesman -ns & xrdp -ns
 # "xfce4-session: Cannot open display: ."
 # dbus-launch --exit-with-session
 # dbus-launch --exit-with-session xfce4-session
+
+# continue running entrypoint (make it pass-through) via the CMD 
+# (custom startup command) that will be executed from the Dockerfile
+# caution: given that this script only prepares a passwd entry for 
+# the current UID, using this line is essential for the server startup 
+# (invoked from CMD which follows a call to ENTRYPOINT)
+exec "$@"
