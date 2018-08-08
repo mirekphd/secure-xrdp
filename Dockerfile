@@ -204,12 +204,16 @@ COPY keymaps /etc/xrdp/
 
 
 # initialize and grant user ownership to the xrdp log file
+# and then copy user permissions to group 
 RUN touch /var/log/xrdp.log && \
-    chown ${USER_NAME} /var/log/xrdp.log
+    chown ${USER_NAME} /var/log/xrdp.log && \
+    chmod -R g=u /var/log/xrdp.log
 
 # initialize and grant user ownership to the xrdp-sesman log file
+# and then copy user permissions to group 
 RUN touch /var/log/xrdp-sesman.log && \
-    chown ${USER_NAME} /var/log/xrdp-sesman.log
+    chown ${USER_NAME} /var/log/xrdp-sesman.log && \
+    chmod -R g=u /var/log/xrdp-sesman.log
 
 # grant user ownership to the xrdp certificate
 RUN chown ${USER_NAME} /etc/xrdp/cert.pem && \
