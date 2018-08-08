@@ -340,6 +340,9 @@ RUN touch /home/${USER_NAME}/.Xauthority && \
 
 COPY entrypoint.sh /entrypoint.sh
 
+# caution: adding exec rights to both user and group is essential
+RUN chmod ug+x /entrypoint.sh
+
 ENTRYPOINT /entrypoint.sh
 
 # run xrdp and xrdp-sesman in the foreground in debug mode (-ns = no service) 
