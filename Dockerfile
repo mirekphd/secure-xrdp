@@ -233,10 +233,10 @@ RUN chmod -R g=u /etc/xrdp/cert.pem && \
 # # grant user ownership to the entire /etc/xrdp/ folder
 # RUN chown -R ${USER_NAME} /etc/xrdp/
 
-# # grant user ownership to the entire /etc/X11/xrdp folder
-# RUN chown -R user /etc/X11/xrdp
-# grant user ownership to the entire /etc/X11 folder
-RUN chown -R ${USER_NAME} /etc/X11/
+# # # grant user ownership to the entire /etc/X11/xrdp folder
+# # RUN chown -R user /etc/X11/xrdp
+# # grant user ownership to the entire /etc/X11 folder
+# RUN chown -R ${USER_NAME} /etc/X11/
 
 # grant user ownership to the entire /usr/share/X11 folder
 RUN chown -R ${USER_NAME} /usr/share/X11
