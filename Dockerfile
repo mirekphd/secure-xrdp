@@ -230,8 +230,8 @@ RUN chmod -R g=u /etc/xrdp/cert.pem && \
 # # as this would prevent new session from starting)
 # RUN chown -R ${USER_NAME} /var/run/
 
-# grant user ownership to the entire /etc/xrdp/ folder
-RUN chown -R ${USER_NAME} /etc/xrdp/
+# # grant user ownership to the entire /etc/xrdp/ folder
+# RUN chown -R ${USER_NAME} /etc/xrdp/
 
 # # grant user ownership to the entire /etc/X11/xrdp folder
 # RUN chown -R user /etc/X11/xrdp
