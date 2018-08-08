@@ -217,7 +217,8 @@ RUN touch /var/log/xrdp-sesman.log && \
 
 # grant user ownership to the xrdp certificate
 RUN chown ${USER_NAME} /etc/xrdp/cert.pem && \
-    chown ${USER_NAME} /etc/xrdp/key.pem
+    chown ${USER_NAME} /etc/xrdp/key.pem && \
+    chown ${USER_NAME} /etc/xrdp/rsakeys.ini 
 
 # grant user ownership to the entire /var/run folder,
 # where xrdp.pid will be created at run time
