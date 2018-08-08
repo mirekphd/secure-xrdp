@@ -345,9 +345,4 @@ RUN chmod ug+x /entrypoint.sh
 
 ENTRYPOINT /entrypoint.sh
 
-# run xrdp and xrdp-sesman in the foreground in debug mode (-ns = no service) 
-# to see the logs from *both* apps in terminal where docker run was executed
-CMD ["xrdp-sesman -ns & xrdp -ns"]
-
-
 
