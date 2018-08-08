@@ -224,11 +224,11 @@ RUN chmod -R g=u /etc/xrdp/cert.pem && \
     chmod -R g=u /etc/xrdp/key.pem && \
     chmod -R g=u /etc/xrdp/rsakeys.ini
 
-# grant user ownership to the entire /var/run folder,
-# where xrdp.pid will be created at run time
-# (note that we cannot initialize this file in advance,
-# as this would prevent new session from starting)
-RUN chown -R ${USER_NAME} /var/run/
+# # grant user ownership to the entire /var/run folder,
+# # where xrdp.pid will be created at run time
+# # (note that we cannot initialize this file in advance,
+# # as this would prevent new session from starting)
+# RUN chown -R ${USER_NAME} /var/run/
 
 # grant user ownership to the entire /etc/xrdp/ folder
 RUN chown -R ${USER_NAME} /etc/xrdp/
