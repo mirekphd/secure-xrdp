@@ -238,8 +238,8 @@ RUN chmod -R g=u /etc/xrdp/cert.pem && \
 # # grant user ownership to the entire /etc/X11 folder
 # RUN chown -R ${USER_NAME} /etc/X11/
 
-# grant user ownership to the entire /usr/share/X11 folder
-RUN chown -R ${USER_NAME} /usr/share/X11
+# # grant user ownership to the entire /usr/share/X11 folder
+# RUN chown -R ${USER_NAME} /usr/share/X11
 
 # allow all users to use Xorg X server
 # and make it drop its default root rights
