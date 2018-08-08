@@ -5,10 +5,6 @@
 # # so cannot be run at entrypoint in user mode
 # /bin/sh /usr/share/xrdp/socksetup
 
-# run xrdp and xrdp-sesman in the foreground in debug mode (-ns = no service) 
-# to see the logs from *both* apps in terminal where docker run was executed
-xrdp-sesman -ns & xrdp -ns
-
 # create a dbus system daemon
 # note that it needs to be run successfully,
 # or else we will get errors like these in xorgxrdp log:
