@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# add a /etc/passwd entry for the current 
+# arbitrary UID generated randomly by OpenShift at runtime 
+# (or added by -u switch to docker run)
+# (source: container-rhel-examples/starter-arbitrary-uid)
+# note that root is required to execute this script (e.g. at entrypoint)
+
+# if ! whoami &> /dev/null; then
+  if [ -w /etc/passwd ]; then
+    # append a new entry for the user, using the current arbitrary UID 
+    echo "${USER_NAME}:x:$(id -u):${MY_GID}:${USER_NAME} user:${HOME}:" >> /etc/passwd
+  fi
+# fi
+
 # # create the sock dir properly
 # # caution: this would require root, 
 # # so cannot be run at entrypoint in user mode
