@@ -28,6 +28,12 @@
 # dbus-launch --exit-with-session
 # dbus-launch --exit-with-session xfce4-session
 
+
+# run xrdp and xrdp-sesman in the foreground in debug mode (-ns = no service) 
+# to see the logs from *both* apps in terminal where docker run was executed
+xrdp-sesman -ns & xrdp -ns
+
+
 # continue running entrypoint (make it pass-through) via the CMD 
 # (custom startup command) that will be executed from the Dockerfile
 # caution: given that this script only prepares a passwd entry for 
