@@ -6,6 +6,11 @@
 # (source: container-rhel-examples/starter-arbitrary-uid)
 # note that root is required to execute this script (e.g. at entrypoint)
 
+# caution: this line did not work here in entrypoint, 
+# so it was moved to Dockerfile
+# # delete existing entry for the user from /etc/passwd
+# sed -i "/${USER_NAME}:x/d" /etc/passwd
+
 # if ! whoami &> /dev/null; then
   if [ -w /etc/passwd ]; then
     # append a new entry for the user, using the current arbitrary UID 
