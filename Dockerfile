@@ -363,4 +363,5 @@ RUN chmod ug+x /entrypoint.sh
 
 ENTRYPOINT /entrypoint.sh
 
-
+# expose the default RDP port
+EXPOSE 3389
