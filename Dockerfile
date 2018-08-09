@@ -259,6 +259,9 @@ RUN sed -i "s/param=Xorg/param=\/usr\/lib\/xorg\/Xorg/g" /etc/xrdp/sesman.ini
 # RUN sed -i "s/.xorgxrdp/\/home\/${USER_NAME}\/.xorgxrdp/g" /etc/xrdp/sesman.ini
 RUN sed -i "s/.xorgxrdp/\/tmp\/.xorgxrdp/g" /etc/xrdp/sesman.ini
 
+# disable root logins in sesman.ini
+RUN sed -i "s/AllowRootLogin=true/AllowRootLogin=false/g" /etc/xrdp/sesman.ini
+
 # set the DISPLAY environment variable (which is not set automatically) 
 # to avoid this "display is zero error":
 # [INFO ] main: DISPLAY env var set to (null)
