@@ -254,9 +254,10 @@ RUN echo "allowed_users=anybody" >> /etc/X11/Xwrapper.config && \
 RUN sed -i "s/param=Xorg/param=\/usr\/lib\/xorg\/Xorg/g" /etc/xrdp/sesman.ini
 
 # replace the default log file location from the /root folder 
-# with a user-editable location (/home/user_name folder)
+# with a user-editable location (/tmp folder)
 # sed -i -e 's/old/new/g' file.txt
-RUN sed -i "s/.xorgxrdp/\/home\/${USER_NAME}\/.xorgxrdp/g" /etc/xrdp/sesman.ini
+# RUN sed -i "s/.xorgxrdp/\/home\/${USER_NAME}\/.xorgxrdp/g" /etc/xrdp/sesman.ini
+RUN sed -i "s/.xorgxrdp/\/tmp\/.xorgxrdp/g" /etc/xrdp/sesman.ini
 
 # set the DISPLAY environment variable (which is not set automatically) 
 # to avoid this "display is zero error":
