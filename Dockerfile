@@ -278,10 +278,10 @@ RUN sed -i "s/AllowRootLogin=true/AllowRootLogin=false/g" /etc/xrdp/sesman.ini
 ENV DISPLAY=:10.0
 # RUN echo $DISPLAY
 
-# grant user ownership to the /tmp folder
-# to allow session manager to create subfolders there,
-# such as .ICE-unix
-RUN chown ${USER_NAME} /tmp
+# # grant user ownership to the /tmp folder
+# # to allow session manager to create subfolders there,
+# # such as .ICE-unix
+# RUN chown ${USER_NAME} /tmp
 
 # start a session bus instance of dbus-daemon using a shell script;
 # note we should run dbus-launch --exit-with-session after the X server 
