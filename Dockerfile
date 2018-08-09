@@ -322,10 +322,10 @@ RUN mkdir /tmp/.ICE-unix && \
 # RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
 # 	chmod +x /etc/rc.local
 
-# add launching xfce windows manager on exit of dbus-launch
-# to the /etc/profile.d folder (executed when a user logs in) 
-RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/profile.d/start_xfce4_session.sh && \
-	chmod +x /etc/profile.d/start_xfce4_session.sh
+# # add launching xfce windows manager on exit of dbus-launch
+# # to the /etc/profile.d folder (executed when a user logs in) 
+# RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/profile.d/start_xfce4_session.sh && \
+# 	chmod +x /etc/profile.d/start_xfce4_session.sh
 
 # # disable access control in X server, allowing clients to connect from any host;
 # # caution this command cannot be executed until a display is created
