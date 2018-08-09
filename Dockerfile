@@ -317,15 +317,10 @@ RUN mkdir /tmp/.ICE-unix && \
     chown 0:0 /tmp/.ICE-unix && \
     chmod ugo+rwx /tmp/.ICE-unix
 
-# add launching xfce windows manager on exit of dbus-launch
-# to the rc.local script (executed at the end of each multiuser runlevel)
-RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
-	chmod +x /etc/rc.local
-
-# add launching xfce windows manager on exit of dbus-launch
-# to the profile.d folder (executed at the end of each multiuser runlevel)
-RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
-	chmod +x /etc/rc.local
+# # add launching xfce windows manager on exit of dbus-launch
+# # to the rc.local script (executed at the end of each multiuser runlevel)
+# RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/rc.local && \
+# 	chmod +x /etc/rc.local
 
 # add launching xfce windows manager on exit of dbus-launch
 # to the /etc/profile.d folder (executed when a user logs in) 
