@@ -296,8 +296,8 @@ ENV DISPLAY=:10.0
 # 	chmod +x /home/${USER_NAME}/.xinitrc && \
 # RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/X11/xinit/xinitrc && \
 # 	chmod +x /etc/X11/xinit/xinitrc && \
-RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/xdg/xfce4/xinitrc && \
-	chmod +x /etc/xdg/xfce4/xinitrc
+# RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/xdg/xfce4/xinitrc && \
+# 	chmod +x /etc/xdg/xfce4/xinitrc
 	
 # # set xfce as the custom desktop environment 
 # # to be used by xrdp (by creating ~/.Xclients file and making it executable)
