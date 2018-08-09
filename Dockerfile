@@ -294,9 +294,9 @@ ENV DISPLAY=:10.0
 # to the existing xinitrc file in the xfce4 folder
 # RUN echo "dbus-launch --exit-with-session /usr/bin/xfce4-session" > /home/${USER_NAME}/.xinitrc && \
 # 	chmod +x /home/${USER_NAME}/.xinitrc && \
-RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/X11/xinit/xinitrc && \
-	chmod +x /etc/X11/xinit/xinitrc && \
-	echo "dbus-launch --exit-with-session xfce4-session" > /etc/xdg/xfce4/xinitrc && \
+# RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/X11/xinit/xinitrc && \
+# 	chmod +x /etc/X11/xinit/xinitrc && \
+RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/xdg/xfce4/xinitrc && \
 	chmod +x /etc/xdg/xfce4/xinitrc
 	
 # # set xfce as the custom desktop environment 
