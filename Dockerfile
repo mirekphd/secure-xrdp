@@ -304,11 +304,11 @@ ENV DISPLAY=:10.0
 # RUN echo "dbus-launch --exit-with-session xfce4-session" > /home/${USER_NAME}/.Xclients && \
 # 	chmod +x /home/${USER_NAME}/.Xclients
 
-# set xfce as the custom desktop environment 
-# to be used by xrdp (by modifying the existing
-# script used for starting windows managers)
-RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/xrdp/startwm.sh && \
-	chmod +x /etc/xrdp/startwm.sh
+# # set xfce as the custom desktop environment 
+# # to be used by xrdp (by modifying the existing
+# # script used for starting windows managers)
+# RUN echo "dbus-launch --exit-with-session xfce4-session" > /etc/xrdp/startwm.sh && \
+# 	chmod +x /etc/xrdp/startwm.sh
 
 # for some reason .ICE-unix must be root-owned, and making it user-owned
 # causes xfce4-session to raise the following error:
