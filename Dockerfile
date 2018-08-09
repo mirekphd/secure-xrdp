@@ -245,7 +245,7 @@ RUN chmod -R g=u /etc/xrdp/cert.pem && \
 # and make it drop its default root rights
 # (see Xwrapper.config (5) - Linux Man Pages)
 RUN echo "allowed_users=anybody" >> /etc/X11/Xwrapper.config && \
-    echo "needs_root_rights=yes" >> /etc/X11/Xwrapper.config
+    echo "needs_root_rights=no" >> /etc/X11/Xwrapper.config
 
 # # grant user ownership to Xwrapper.config
 # RUN chown ${USER_NAME} /etc/X11/Xwrapper.config 
