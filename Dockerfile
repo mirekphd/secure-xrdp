@@ -347,6 +347,21 @@ ENV XAUTHORITY=/tmp/.Xauthority
 #     chown user /var/run/xrdp.pid
 
 
+#################################################################################################################
+#   TINI
+#################################################################################################################
+
+# Install Tini
+# ENV TINI_VERSION v0.17.0
+ENV TINI_VERSION v0.18.0
+
+RUN cd /tmp && \
+    wget --quiet https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini && \
+    # aria2c --file-allocation=none -c -x 10 -s 10 https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini && \
+    mv tini /usr/local/bin/tini && \
+    chmod +x /usr/local/bin/tini
+
+
 # delete existing entry for the user from /etc/passwd
 # caution: this is absolutely essential to avoid user IDs mismatch,
 # which prevents both RStudio Server and NX Server from starting,
