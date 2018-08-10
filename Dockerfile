@@ -385,7 +385,14 @@ COPY entrypoint.sh /entrypoint.sh
 # caution: adding exec rights to both user and group is essential
 RUN chmod ug+x /entrypoint.sh
 
-ENTRYPOINT /entrypoint.sh
+# ENTRYPOINT /entrypoint.sh
+# configure Tini as container's entrypoint (PID 1)
+# caution: eliminating zombie processes by tinig is needed
+# to speed up container stopping (scaling down) by 10-15 seconds
+# note that we need to prefix our custom entrypoint script 
+# (the custom UID change script) with tini
+# (as advised at https://github.com/krallin/tini-images)
+ENTRYPOINT ["/usr/local/bin/tini", "--", "/entrypoint.sh"]
 
 # expose the default RDP port
 EXPOSE 3389
